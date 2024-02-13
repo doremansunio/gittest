@@ -15,10 +15,6 @@ provider "github" {
   token = "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"  
 }
 
-variable "project_name" {
-  type = string  
-}
-
 resource "local_file" "netpolicy-file" {
   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
   //depends_on = [rafay_groupassociation.group-association]
