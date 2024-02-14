@@ -12,7 +12,7 @@ terraform {
 }
 
 provider "github" {
-  token = "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"  
+  #token = "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"  
 }
 
 resource "local_file" "netpolicy-file" {
@@ -24,6 +24,12 @@ resource "local_file" "netpolicy-file" {
   })
 }
 
+data "template_file" "example" {
+    template = file("${path.module}/net-policy-template.yaml")
+    vars = {
+      project_name = var.project_name
+    }
+}
 
 
 resource "null_resource" "name1" {
@@ -47,7 +53,7 @@ resource "github_repository_file" "netgitfile" {
     repository = "gittest"
     branch= "main"
     file="loca_file.yaml"
-    content = file("${path.module}/net-policy-template.yaml")
+    content = data.template_file.example.rendered
 }
 
 
