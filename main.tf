@@ -76,17 +76,18 @@ resource "local_file" "netpolicy-file" {
   })
 }
 
-data "aws_s3_bucket" "bukname" {
-    bucket = "rafay-s3-bucket"
-}
+# data "aws_s3_bucket" "bukname" {
+#     bucket = "rafay-s3-bucket"
+# }
 
 resource "aws_s3_object" "s3file" {
-    bucket = data.aws_s3_bucket.bukname.bucket
+    bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
     key="${var.project_name}-within-ws-rule.yaml"
     source = "/my-folder/${var.project_name}-within-ws-rule.yaml"
     //acl="private"  
 }
 
 output "test" {
+    value = aws_s3_object.s3file.
     value = file("${path.module}/net-policy-template.yaml")
 }
