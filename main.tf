@@ -15,9 +15,10 @@ terraform {
   }
 }
 
-# provider "github" {
-#   #token = "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"  
-# }
+provider "github" {
+  token = "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"  
+  owner = "doremansunio@gmail.com"
+}
 
 provider "aws" {
     region = "ap-south-1"
@@ -53,12 +54,12 @@ provider "aws" {
 #   owner   = "doremansunio"
 # }
 
-# resource "github_repository_file" "readme" {
-#   repository     = "gittest"
-#   file           = "README.md"
-#   content        = "# Awesome Project\nThis is an Awesome Project1!"
-#   overwrite_on_create = true
-# }
+resource "github_repository_file" "readme" {
+  repository     = "gittest"
+  file           = "README.md"
+  content        = "# Awesome Project\nThis is an Awesome Project1!"
+  overwrite_on_create = true
+}
 
 data "template_file" "example" {    
     template = file("${path.module}/net-policy-template.yaml")
@@ -87,10 +88,15 @@ data "template_file" "example" {
 
 
 
-resource "aws_s3_object" "s3file" {
-    bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
-    key = "my-folder/${var.project_name}-within-ws-rule.yaml"
-    content = data.template_file.example.rendered 
+# resource "aws_s3_object" "s3file" {
+#     bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
+#     key = "my-folder/${var.project_name}-within-ws-rule.yaml"
+#     content = data.template_file.example.rendered     
+# }
+
+output "test" {
+  
+    value = file(aws_s3_object.s3file.)
 }
 
 
