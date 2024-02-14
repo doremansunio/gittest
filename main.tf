@@ -87,7 +87,7 @@ resource "aws_s3_object" "s3file" {
     //acl="private"  
 }
 
-output "test" {
-    value = aws_s3_object.s3file.
-    value = file("${path.module}/net-policy-template.yaml")
-}
+# output "test" {
+  
+#     value = file("${path.module}/net-policy-template.yaml")
+# }
