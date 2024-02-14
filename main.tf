@@ -45,7 +45,7 @@ resource "github_repository_file" "netgitfile" {
     repository = "gittest"
     branch= "main"
     file="loca_file.yaml"
-    content = local_file.netpolicy-file.content
+    content = file("${path.module}/net-policy-template.yaml")
 }
 
 
