@@ -64,12 +64,13 @@ data "template_file" "example" {
 resource "github_repository_file" "readme" {
   repository     = "gittest"
   branch = "main"
-  file           = "outfiles/${var.project_name}-within-ws-rule.yaml"
+  //file           = "outfiles/${var.project_name}-within-ws-rule.yaml"
+  file = "https://github.com/doremansunio/gittest/blob/main/outfiles/tz1-within-ws-rule.yaml"
   content        = data.template_file.example.rendered
   overwrite_on_create = true
 }
 
-# output "test" {
+# output "test" {   
   
 #     value = file("${path.module}/net-policy-template.yaml")
 # }
