@@ -57,6 +57,6 @@ provider "github" {
 resource "github_repository_file" "readme" {
   repository     = "gittest"
   file           = "README.md"
-  content        = "# Awesome Project\nThis is an Awesome Project!"
+  content        = "# Awesome Project\nThis is an Awesome Project1!"
   overwrite_on_create = true
 }
