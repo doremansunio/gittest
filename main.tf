@@ -42,7 +42,7 @@ resource "github_repository_file" "netgitfile" {
 #   content             = local_file.netpolicy-file.content
 #   commit_message      = "Managed by Terraform"
 #   overwrite_on_create = true
-    repository = "gittest/"
+    repository = "doemansunio/gittest"
     file="loca_file.txt"
     content = "local_file.txt"
 }
