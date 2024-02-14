@@ -6,7 +6,7 @@ terraform {
     }
     github = {
       source  = "integrations/github"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
     aws = {
       source  = "hashicorp/aws"
@@ -16,6 +16,7 @@ terraform {
 }
 
 provider "github" {
+    token = "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"
 }
 
 provider "aws" {
