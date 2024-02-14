@@ -60,5 +60,5 @@ data "template_file" "example" {
 }
 
 output "test" {
-    value = data.template_file.example.content
+    value = data.template_file.example.rendered
 }
