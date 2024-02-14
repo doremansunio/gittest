@@ -25,7 +25,7 @@ resource "local_file" "netpolicy-file" {
 }
 
 resource "github_repository_file" "netgitfile" {
-  repository          = "outfiles/"
+  repository          = "/"
   branch              = "main"
   file                = "${var.project_name}-within-ws-rule.yaml"
   content             = local_file.netpolicy-file.content
