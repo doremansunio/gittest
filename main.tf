@@ -52,19 +52,21 @@ provider "aws" {
 #   owner   = "doremansunio"
 # }
 
-resource "github_repository_file" "readme" {
-  repository     = "gittest"
-  branch = "main"
-  file           = "README.md"
-  content        = "# Awesome Project\nThis is an Awesome Project1!"
-  overwrite_on_create = true
-}
+
 
 data "template_file" "example" {    
     template = file("${path.module}/net-policy-template.yaml")
     vars = {
         project_name = var.project_name
     }
+}
+
+resource "github_repository_file" "readme" {
+  repository     = "gittest"
+  branch = "main"
+  file           = "outfiles/${var.project_name}-within-ws-rule.yaml"
+  content        = data.template_file.example.rendered
+  overwrite_on_create = true
 }
 
 # output "test" {
