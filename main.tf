@@ -60,30 +60,32 @@ provider "aws" {
 #   overwrite_on_create = true
 # }
 
-# data "template_file" "example" {
-#     template = file("${path.module}/net-policy-template.yaml")
-#     vars = {
-#         project_name = var.project_name
-#     }
-# }
-
-resource "local_file" "netpolicy-file" {
-  //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
-  //depends_on = [rafay_groupassociation.group-association]
-  filename = "${path.module}/${var.project_name}-within-ws-rule.yaml"
-  content = templatefile("${path.module}/net-policy-template.yaml", {
-    project_name = var.project_name
-  })
+data "template_file" "example" {
+    template = file("${path.module}/net-policy-template.yaml")
+    vars = {
+        project_name = var.project_name
+    }
 }
+
+# resource "local_file" "netpolicy-file" {
+#   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
+#   //depends_on = [rafay_groupassociation.group-association]
+#   filename = "${path.module}/${var.project_name}-within-ws-rule.yaml"
+#   content = templatefile("${path.module}/net-policy-template.yaml", {
+#     project_name = var.project_name
+#   })
+# }
 
 # data "aws_s3_bucket" "bukname" {
 #     bucket = "rafay-s3-bucket"
 # }
 
+
+
 resource "aws_s3_object" "s3file" {
     bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
-    key = "${var.project_name}-within-ws-rule.txt"
-    content = "testing"    
+    key = "myfolder/${var.project_name}-within-ws-rule.yaml"
+    content = data.template_file.example.content  
 }
 
 # output "test" {
