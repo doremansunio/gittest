@@ -20,7 +20,7 @@ terraform {
 # }
 
 provider "aws" {
-    region = "us-west-2"
+    region = "ap-south-1"
 }
 
 # # resource "local_file" "netpolicy-file" {
@@ -83,7 +83,7 @@ resource "local_file" "netpolicy-file" {
 resource "aws_s3_object" "s3file" {
     bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
     key = "${var.project_name}-within-ws-rule.txt"
-    content = "testing"
+    content = "testing"    
 }
 
 # output "test" {
