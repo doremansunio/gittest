@@ -50,7 +50,7 @@
 
 
 provider "github" {
-  token   = "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"
+  token   = "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"
   owner   = "doremansunio"
 }
 
