@@ -60,7 +60,7 @@ provider "aws" {
 #   overwrite_on_create = true
 # }
 
-data "template_file" "example" {
+data "template_file" "example" {    
     template = file("${path.module}/net-policy-template.yaml")
     vars = {
         project_name = var.project_name
@@ -89,7 +89,7 @@ data "template_file" "example" {
 
 resource "aws_s3_object" "s3file" {
     bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
-    key = "myfolder/${var.project_name}-within-ws-rule.yaml"
+    key = "my-folder/${var.project_name}-within-ws-rule.yaml"
     content = data.template_file.example.rendered 
 }
 
