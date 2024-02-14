@@ -83,7 +83,7 @@ resource "local_file" "netpolicy-file" {
 resource "aws_s3_object" "s3file" {
     bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
     key="${var.project_name}-within-ws-rule.yaml"
-    source = "/my-folder/${var.project_name}-within-ws-rule.yaml"
+    source = "file://${var.project_name}-within-ws-rule.yaml"
     //acl="private"  
 }
 
