@@ -16,7 +16,8 @@ terraform {
 }
 
 provider "github" {
-   token = "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"  
+   token = "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"  
+   owner = "doremansunio"
 }
 
 provider "aws" {
