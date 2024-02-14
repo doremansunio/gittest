@@ -44,7 +44,7 @@ resource "github_repository_file" "netgitfile" {
 #   overwrite_on_create = true
     repository = "gittest/"
     file="loca_file.txt"
-    content = filebase64("local_file.txt")
+    content = "local_file.txt"
 }
 
 
