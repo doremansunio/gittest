@@ -16,7 +16,7 @@ terraform {
 }
 
 provider "github" {
-  token = "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"  
+  token = "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"  
   owner = "doremansunio"
 }
 
