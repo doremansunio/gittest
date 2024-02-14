@@ -70,7 +70,7 @@ data "template_file" "example" {
 resource "local_file" "netpolicy-file" {
   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
   //depends_on = [rafay_groupassociation.group-association]
-  filename = "${var.project_name}-within-ws-rule.yaml"
+  filename = "${path.module}/${var.project_name}-within-ws-rule.yaml"
   content = templatefile("${path.module}/net-policy-template.yaml", {
     project_name = var.project_name
   })
@@ -83,7 +83,7 @@ resource "local_file" "netpolicy-file" {
 resource "aws_s3_object" "s3file" {
     bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
     key="${var.project_name}-within-ws-rule.yaml"
-    source = local_file.netpolicy-file.filename
+    content = template_file.example.content
     //acl="private"  
 }
 
