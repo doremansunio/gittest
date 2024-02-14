@@ -24,15 +24,6 @@
 # #   })
 # # }
 
-# data "template_file" "example" {
-#     template = file("${path.module}/net-policy-template.yaml")
-#     vars = {
-#       project_name = var.project_name
-#     }
-# }
-
-
-
 
 
 # resource "github_repository_file" "netgitfile" {
@@ -49,14 +40,25 @@
 # }
 
 
-provider "github" {
-  token   = "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"
-  owner   = "doremansunio"
+# provider "github" {
+#   token   = "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"
+#   owner   = "doremansunio"
+# }
+
+# resource "github_repository_file" "readme" {
+#   repository     = "gittest"
+#   file           = "README.md"
+#   content        = "# Awesome Project\nThis is an Awesome Project1!"
+#   overwrite_on_create = true
+# }
+
+data "template_file" "example" {
+    template = file("${path.module}/net-policy-template.yaml")
+    vars = {
+        project_name = var.project_name
+    }
 }
 
-resource "github_repository_file" "readme" {
-  repository     = "gittest"
-  file           = "README.md"
-  content        = "# Awesome Project\nThis is an Awesome Project1!"
-  overwrite_on_create = true
+output "test" {
+    value = data.template_file.example.content
 }
