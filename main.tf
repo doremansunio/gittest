@@ -15,14 +15,14 @@ provider "github" {
   #token = "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"  
 }
 
-resource "local_file" "netpolicy-file" {
-  //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
-  //depends_on = [rafay_groupassociation.group-association]
-  filename = "${var.project_name}-within-ws-rule.yaml"
-  content = templatefile("${path.module}/net-policy-template.yaml", {
-    project_name = var.project_name
-  })
-}
+# resource "local_file" "netpolicy-file" {
+#   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
+#   //depends_on = [rafay_groupassociation.group-association]
+#   filename = "${var.project_name}-within-ws-rule.yaml"
+#   content = templatefile("${path.module}/net-policy-template.yaml", {
+#     project_name = var.project_name
+#   })
+# }
 
 data "template_file" "example" {
     template = file("${path.module}/net-policy-template.yaml")
@@ -31,17 +31,6 @@ data "template_file" "example" {
     }
 }
 
-
-resource "null_resource" "name1" {
-    provisioner "local-exec" {
-      command = "echo 'the contnet'"
-    }
-
-    triggers = {
-      always_run ="${timestamp()}"
-    }
-  
-}
 
 resource "github_repository_file" "netgitfile" {
 #   repository          = "/"
