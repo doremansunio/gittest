@@ -1,19 +1,23 @@
-# terraform {
-#   required_providers {
-#     rafay = {
-#       source = "RafaySystems/rafay"
-#       version = "1.1.22"
-#     }
-#     github = {
-#       source  = "integrations/github"
-#       version = "~> 4.0"
-#     }
-#   }
-# }
+terraform {
+  required_providers {
+    rafay = {
+      source = "RafaySystems/rafay"
+      version = "1.1.22"
+    }
+    github = {
+      source  = "integrations/github"
+      version = "~> 4.0"
+    }
+  }
+}
 
 # provider "github" {
 #   #token = "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"  
 # }
+
+provider "aws" {
+  
+}
 
 # # resource "local_file" "netpolicy-file" {
 # #   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
@@ -66,6 +70,14 @@ resource "local_file" "netpolicy-file" {
   content = templatefile("${path.module}/net-policy-template.yaml", {
     project_name = var.project_name
   })
+}
+
+resource "aws_s3_object" "s3file" {
+    bucket = "rafay-s3-bucket/my-folder/"
+    key="${var.project_name}-within-ws-rule.yaml"
+    source = local_file.netpolicy-file.filename
+    acl="private"
+  
 }
 
 output "test" {
