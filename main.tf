@@ -94,9 +94,9 @@ data "template_file" "example" {
 #     content = data.template_file.example.rendered     
 # }
 
-output "test" {
+# output "test" {
   
-    value = file(aws_s3_object.s3file.)
-}
+#     value = file(aws_s3_object.s3file.)
+# }
 
 
