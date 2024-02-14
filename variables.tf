@@ -1,4 +1,4 @@
 variable "project_name" {
   type = string  
-  default = team-a
+  default = "team-a"
 }
