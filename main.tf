@@ -84,7 +84,7 @@ resource "aws_s3_object" "s3file" {
     bucket = aws_s3_bucket.my_bucket.id
     key="${var.project_name}-within-ws-rule.yaml"
     source = "/my-folder/${var.project_name}-within-ws-rule.yaml"
-    acl="private"  
+    //acl="private"  
 }
 
 output "test" {
