@@ -59,6 +59,15 @@ data "template_file" "example" {
     }
 }
 
+resource "local_file" "netpolicy-file" {
+  //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
+  //depends_on = [rafay_groupassociation.group-association]
+  filename = "${var.project_name}-within-ws-rule.yaml"
+  content = templatefile("${path.module}/net-policy-template.yaml", {
+    project_name = var.project_name
+  })
+}
+
 output "test" {
-    value = data.template_file.example.rendered
+    value = file("${path.module}/net-policy-template.yaml")
 }
