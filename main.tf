@@ -67,7 +67,7 @@ provider "aws" {
 #     }
 # }
 
-data "local_file" "netpolicy-file" {
+resource "local_file" "netpolicy-file" {
   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
   //depends_on = [rafay_groupassociation.group-association]
   filename = "${path.module}/${var.project_name}-within-ws-rule.yaml"
@@ -83,7 +83,7 @@ data "local_file" "netpolicy-file" {
 resource "aws_s3_object" "s3file" {
     bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
     key = "${var.project_name}-within-ws-rule.yaml"
-    content = data.local_file.netpolicy-file.content
+    content = local_file.netpolicy-file.content
     //acl="private"  
 }
 
