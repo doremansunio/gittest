@@ -24,13 +24,27 @@ resource "local_file" "netpolicy-file" {
   })
 }
 
+resource "null_resource" "name1" {
+    provisioner "local-exec" {
+      command = "echo 'the contnet'"
+    }
+
+    triggers = {
+      always_run ="${timestamp()}"
+    }
+  
+}
+
 resource "github_repository_file" "netgitfile" {
-  repository          = "/"
-  branch              = "main"
-  file                = "${var.project_name}-within-ws-rule.yaml"
-  content             = local_file.netpolicy-file.content
-  commit_message      = "Managed by Terraform"
-  overwrite_on_create = true
+#   repository          = "/"
+#   branch              = "main"
+#   file                = "${var.project_name}-within-ws-rule.yaml"
+#   content             = local_file.netpolicy-file.content
+#   commit_message      = "Managed by Terraform"
+#   overwrite_on_create = true
+    repository = "gittest/"
+    file="loca_file.txt"
+    content = filebase64("local_file.txt")
 }
 
 
