@@ -67,6 +67,11 @@ data "template_file" "example" {
     }
 }
 
+# output "test" {
+  
+#     value = file("${path.module}/net-policy-template.yaml")
+# }
+
 # resource "local_file" "netpolicy-file" {
 #   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
 #   //depends_on = [rafay_groupassociation.group-association]
@@ -85,10 +90,7 @@ data "template_file" "example" {
 resource "aws_s3_object" "s3file" {
     bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
     key = "myfolder/${var.project_name}-within-ws-rule.yaml"
-    content = data.template_file.example.content  
+    content = data.template_file.example.rendered 
 }
 
-# output "test" {
-  
-#     value = file("${path.module}/net-policy-template.yaml")
-# }
+
