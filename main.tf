@@ -60,14 +60,14 @@ provider "aws" {
 #   overwrite_on_create = true
 # }
 
-data "template_file" "example" {
-    template = file("${path.module}/net-policy-template.yaml")
-    vars = {
-        project_name = var.project_name
-    }
-}
+# data "template_file" "example" {
+#     template = file("${path.module}/net-policy-template.yaml")
+#     vars = {
+#         project_name = var.project_name
+#     }
+# }
 
-resource "local_file" "netpolicy-file" {
+data "local_file" "netpolicy-file" {
   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
   //depends_on = [rafay_groupassociation.group-association]
   filename = "${path.module}/${var.project_name}-within-ws-rule.yaml"
@@ -82,8 +82,8 @@ resource "local_file" "netpolicy-file" {
 
 resource "aws_s3_object" "s3file" {
     bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
-    key="${var.project_name}-within-ws-rule.yaml"
-    content = template_file.example.content
+    key = "${var.project_name}-within-ws-rule.yaml"
+    content = data.local_file.netpolicy-file.content
     //acl="private"  
 }
 
